@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
                     Navigator.of(context).push(MaterialPageRoute(builder: (_) => const UserScanPage()));
                   },
                   icon: const Icon(Icons.qr_code_scanner),
-                  label: const Text('使用者：掃描貼紙 / 領取 / 核銷'),
+                  label: const Text('使用者：掃描 / 領取 / 核銷'),
                 ),
                 const SizedBox(height: 16),
                 OutlinedButton.icon(
@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                     Navigator.of(context).push(MaterialPageRoute(builder: (_) => const MerchantBindPage()));
                   },
                   icon: const Icon(Icons.storefront_outlined),
-                  label: const Text('商家：綁定 NFC 貼紙'),
+                  label: const Text('商家：綁定貼紙 / 產生代碼'),
                 ),
               ],
             ),

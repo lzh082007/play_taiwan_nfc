@@ -12,6 +12,10 @@ dependencies:
 
   nfc_manager: ^4.2.0
   http: ^1.2.0
+  mobile_scanner: ^7.4.2
+  qr_flutter: ^4.1.0
+  uuid: ^4.6.0
+  share_plus: ^13.3.0
 
 dev_dependencies:
   flutter_test:

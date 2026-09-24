@@ -1,12 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 讀取 NFC 標籤所需的權限 -->
     <uses-permission android:name="android.permission.NFC"/>
+    <!-- 掃描 QR 碼所需的相機權限 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
     <!-- 呼叫 Python API 所需的網路權限（debug/profile manifest 已有，但 release build 也需要，所以主 manifest 這裡也要加） -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <!-- required="false"：讓沒有 NFC 的裝置也能安裝這個 App，
          實際有沒有 NFC 由 App 內用 NfcManager.checkAvailability() 判斷並顯示對應訊息 -->
     <uses-feature android:name="android.hardware.nfc" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
 
     <application
         android:label="NFC標籤讀取示意"
