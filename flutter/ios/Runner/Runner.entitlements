@@ -2,9 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- TODO: 暫時拿掉 NFC Tag Reading 權限，因為免費的 Personal Team 無法簽署這個權限，
+	     目前先用 QR Code 測試。加入付費 Apple Developer Program 後要把下面這段加回來，
+	     iOS 才能讀 NFC 貼紙：
 	<key>com.apple.developer.nfc.readersession.formats</key>
 	<array>
 		<string>TAG</string>
 	</array>
+	-->
 </dict>
 </plist>

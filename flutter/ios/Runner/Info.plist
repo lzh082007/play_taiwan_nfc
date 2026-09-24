@@ -30,6 +30,8 @@
 	<string>需要使用 NFC 讀取貼紙上的資訊</string>
 	<key>NSCameraUsageDescription</key>
 	<string>需要使用相機掃描 QR 碼</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>需要連線到區網內的測試伺服器查詢商家與優惠券資訊</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
