@@ -28,14 +28,6 @@
 	<true/>
 	<key>NFCReaderUsageDescription</key>
 	<string>需要使用 NFC 讀取貼紙上的資訊</string>
-	<!-- TODO: 這裡先放一個佔位用的假 AID，要換成這張貼紙實際的 AID，
-	     否則 iOS 端偵測不到這張卡片。不知道 AID 的話，可以拿已經能動的
-	     Android 版本，透過 IsoDepAndroid.transceive() 送 APDU 指令去問卡片
-	     （例如送 SELECT PPSE 或讀 historicalBytes）來找出實際的 AID。 -->
-	<key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
-	<array>
-		<string>F0000000000000</string>
-	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -30,16 +30,12 @@ class NfcTagResult {
 
 /// 封裝 NFC 掃描流程：檢查裝置支援度 → 開始 session → 讀到卡片後回傳 UID → 停止 session。
 ///
-/// 注意：這張卡片實測回報的是 ISO14443-4（Type A / IsoDep），不是 NTAG215 那種
-/// ISO14443-3A / Type 2，所以這裡不使用 MifareUltralight 相關 API 去讀卡
-/// （MifareUltralightAndroid.from(tag) 對這種卡片會拿到 null），
-/// 而是直接用 NfcTagAndroid.from(tag) 取得 Android 平台內建、跟技術類型無關的 id 和 techList。
+/// 貼紙規格是 NTAG215（ISO14443-3A / Type 2）。
+/// Android 這邊直接用 NfcTagAndroid.from(tag) 取得平台內建、跟技術類型無關的 id 和 techList。
 ///
-/// iOS 這邊卡片是用 ISO7816 協定讀（Iso7816Ios），跟 Android 不同的是：
-/// iOS 偵測 ISO7816 卡片前，系統會先拿 Info.plist 裡宣告的 AID
-/// （com.apple.developer.nfc.readersession.iso7816.select-identifiers）依序對卡片
-/// 送 SELECT，只有比對成功的卡片才會觸發 onDiscovered——AID 沒填對，iOS 端會完全
-/// 偵測不到這張卡片，這點跟 Android「不管卡片內容直接拿到原始 tag」的行為不一樣。
+/// iOS 這邊 NTAG215 屬於 MiFare family，用 MiFareIos.from(tag) 讀（不是 Iso7816Ios）。
+/// 這類標籤 iOS 偵測時不需要在 Info.plist 宣告 AID 就能觸發 onDiscovered，
+/// 跟通用 ISO7816 智慧卡（例如身分證、護照那類需要先 SELECT AID 才會被偵測到的卡片）不同。
 class NfcService {
   Future<NfcAvailability> checkAvailability() {
     return NfcManager.instance.checkAvailability();
@@ -103,12 +99,9 @@ class NfcService {
   }
 
   NfcTagResult? _readIosTag(NfcTag tag) {
-    final iso7816Tag = Iso7816Ios.from(tag);
-    if (iso7816Tag == null) return null;
-    return NfcTagResult(
-      uidHex: _formatUid(iso7816Tag.identifier),
-      techList: ['iso7816 (AID: ${iso7816Tag.initialSelectedAID})'],
-    );
+    final miFareTag = MiFareIos.from(tag);
+    if (miFareTag == null) return null;
+    return NfcTagResult(uidHex: _formatUid(miFareTag.identifier), techList: const ['MiFare (NTAG215)']);
   }
 
   String _formatUid(Uint8List bytes) {
